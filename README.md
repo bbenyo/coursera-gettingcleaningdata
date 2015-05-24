@@ -38,8 +38,10 @@ Execution
 
 1. To run the full analysis, simply execute the full_analysis() function. full_analysis will return a tidy'd data frame:
 
+<code>tidy <- full_analysis()</code>
+
+Output:
 <code>
-> tidy <- full_analysis()
 [1] "Found Dataset files, loading data..."
 [1] "Loading labels"
 [1] "Loading train data"
@@ -48,8 +50,10 @@ Execution
 [1] "Loading test data"
 [1] "Read in test data: Dimensions: 2947" "Read in test data: Dimensions: 479" 
 [1] "Merging training and test set"
-> View(tidy)
-> print(tidy)
+</code>
+
+<code>
+print(tidy)
 Source: local data frame [23,760 x 5]
 
    SubjectID Activity          FeatureName Function Measurement
@@ -68,11 +72,13 @@ Source: local data frame [23,760 x 5]
 
 This function also outputs the data into a text file named "tidy.UCIHARDataSet.txt" using write.table.
 
-2. Alternatively, you can execute individual steps.  Step 0 loads all of the initial data into one large data frame.  This step also performs Steps 3 and 4 from the course project instructions (renaming the variables and substituting activity names for values)
+Alternatively, you can execute individual steps.  Step 0 loads all of the initial data into one large data frame.  This step also performs Steps 3 and 4 from the course project instructions (renaming the variables and substituting activity names for values)
 
 <code>s0 <- step_0()</code>
 
-1.  This step loads in the activity names from the data set "activity_labels.txt" file and uses those to convert the activity (y_train, y_test) columns into a factor variable (1 = WALKING, for example)
+Step_0 (Step 1)
+---------
+This step loads in the activity names from the data set "activity_labels.txt" file and uses those to convert the activity (y_train, y_test) columns into a factor variable (1 = WALKING, for example)
 
 *  This step also loads in the feature names from "features.txt" and uses those as the column names
 
@@ -80,10 +86,17 @@ This function also outputs the data into a text file named "tidy.UCIHARDataSet.t
 
 *  This step drops the set of columns that are duplicates.  Columns such as 303:343 are not unique.  Since these columns are not relevant for our analysis, they are simply removed here.  They would be removed in step_2 if we kept them around by renaming.
 
-2. Step_2 selects only the columns that end in mean() or std().  This will remove variables like "angle(Y, gravityMean)".  The regular expression in step_2 can be edited, if the user desires a different meaning for which variables to keep for analysis.
+Step_2
+---------
+Step_2 selects only the columns that end in mean() or std().  This will remove variables like "angle(Y, gravityMean)".  The regular expression in step_2 can be edited, if the user desires a different meaning for which variables to keep for analysis.
 
-3. Steps 3 and 4 from the course project description were performed in the step_0 function.
+Step_3 and Step_4
+-----------------
+Steps 3 and 4 from the course project description were performed in the step_0 function.
 
-4. Step 5 is accomplished through the "tidy_step_5" method.  This summarizes the data grouped by SubjectID and Activity, and applys the functions "mean" and "sd".  This step also converts the data set into a tall data set instead of a wide data set.  If you instead want a wide data set, comment out the "gather" and "separate" likes.
+Tidy Step 5
+-----------------
+Step 5 is accomplished through the "tidy_step_5" method.  This summarizes the data grouped by SubjectID and Activity, and applys the functions "mean" and "sd".  This step also converts the data set into a tall data set instead of a wide data set.  If you instead want a wide data set, comment out the "gather" and "separate" likes.
 
-5. The resulting tidy data set has one variable in each column, one observation on each row.
+
+The resulting tidy data set has one variable in each column, one observation on each row.
